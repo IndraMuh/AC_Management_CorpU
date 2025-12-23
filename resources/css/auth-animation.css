@@ -1,0 +1,38 @@
+/* Animasi Inti */
+@keyframes scrollUp { 
+    0% { transform: translateY(0); } 
+    100% { transform: translateY(-50%); } 
+}
+
+@keyframes scrollDown { 
+    0% { transform: translateY(-50%); } 
+    100% { transform: translateY(0); } 
+}
+
+/* Variasi Kecepatan */
+.animate-up { animation: scrollUp 20s linear infinite; }
+.animate-down { animation: scrollDown 22s linear infinite; }
+.animate-up-slow { animation: scrollUp 28s linear infinite; }
+.animate-down-slow { animation: scrollDown 25s linear infinite; }
+
+/* Struktur Box Gambar */
+.image-track-container {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem; /* gap-3 */
+}
+
+.img-item {
+    width: 100%;
+    height: 160px; /* Tinggi gambar disesuaikan agar 4 gambar pas di layar */
+    flex-shrink: 0;
+    border-radius: 1.5rem; /* rounded-3xl */
+    overflow: hidden;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.img-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
