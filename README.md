@@ -1,84 +1,85 @@
 # ❄️ Management AC Telkom CorpU
-> **Sistem Monitoring & Inventaris Maintenance AC Real-Time**
+> **Enterprise Asset Management System for High-Efficiency Maintenance Tracking**
 
-[![Laravel Version](https://img.shields.io/badge/Laravel-12.x-red?style=for-the-badge&logo=laravel)](https://laravel.com)
-[![PHP Version](https://img.shields.io/badge/PHP-8.2%2B-blue?style=for-the-badge&logo=php)](https://php.net)
-[![Database](https://img.shields.io/badge/Database-MySQL-orange?style=for-the-badge&logo=mysql)](https://mysql.com)
-
-**Management AC Telkom CorpU** adalah aplikasi manajemen aset khusus untuk unit pendingin ruangan (AC) di lingkungan Corporate University. Aplikasi ini mendigitalisasi proses pencatatan, pemantauan status, hingga manajemen perbaikan unit secara terpusat.
-
----
-
-## 🚀 Teknologi Utama
-
-Aplikasi ini dibangun dengan stack teknologi modern untuk menjamin performa dan skalabilitas:
-
-* **Backend:** PHP dengan Framework **Laravel 12** (Latest Version).
-* **Database:** **MySQL / MariaDB** untuk penyimpanan relasi data aset yang kompleks.
-* **Frontend:** **Blade Templating Engine** dipadukan dengan desain dashboard yang interaktif dan responsif.
-* **Authentication:** Sistem hak akses terproteksi untuk manajemen user.
+[![Framework](https://img.shields.io/badge/Laravel-12.x-E3342F?style=for-the-badge&logo=laravel&logoColor=white)](https://laravel.com)
+[![PHP](https://img.shields.io/badge/PHP-8.2%2B-777BB4?style=for-the-badge&logo=php&logoColor=white)](https://php.net)
+[![Database](https://img.shields.io/badge/MySQL-00758F?style=for-the-badge&logo=mysql&logoColor=white)](https://mysql.com)
+[![License](https://img.shields.io/badge/License-MIT-green?style=for-the-badge)](LICENSE)
 
 ---
 
-## 📂 Struktur Penting Repositori
+## 📋 Ikhtisar Proyek
 
-Memahami struktur proyek untuk pengembangan lebih lanjut:
+**Management AC Telkom CorpU** adalah sistem manajemen aset digital yang dirancang khusus untuk mengoptimalkan siklus hidup pemeliharaan unit pendingin ruangan (AC) di lingkungan **Telkom Corporate University**. 
 
-* 📂 `app/Http/Controllers/`: Inti dari logika program dan kontrol alur data aplikasi.
-* 📂 `database/migrations/`: Definisi skema database (Tabel aset, user, dan manajemen unit).
-* 📂 `resources/views/`: File UI/Tampilan yang diorganisir berdasarkan modul (Admin, Dashboard, dll).
-* 📂 `routes/web.php`: Daftar seluruh rute (URL) dan endpoint aplikasi.
+Sistem ini mentransformasi proses manual menjadi alur kerja digital yang terukur, memungkinkan pengambilan keputusan berbasis data terkait perbaikan, penggantian aset, dan manajemen vendor maintenance.
 
 ---
 
-## ✨ Fitur & Fungsi
+## 🛠️ Arsitektur & Teknologi
 
-1.  **Inventarisasi Aset:** Pencatatan detail unit AC, lokasi gedung, dan spesifikasi unit.
-2.  **Maintenance Tracking:** Pengelolaan jadwal pemeliharaan rutin dan perbaikan (rusak/proses/selesai).
-3.  **User Management:** Pengaturan hak akses login untuk admin dan petugas operasional di lingkungan CorpU.
-4.  **Reporting:** Monitoring status aset secara real-time melalui dashboard utama.
+Sistem ini dibangun dengan arsitektur **Monolithic Robust** menggunakan teknologi terkini:
+
+* **Core Engine:** Laravel 12 (Modern PHP Framework)
+* **Database:** MySQL (Relational Database Management System)
+* **Templating:** Blade Engine dengan implementasi Reusable Components
+* **Styling:** Tailwind CSS (Utility-first CSS framework untuk UI yang responsif)
+* **Architecture:** MVC (Model-View-Controller) Pattern
 
 ---
 
-## 🛠️ Panduan Instalasi Lokal
+## 📂 Struktur Repositori & Modul
 
-Ikuti langkah berikut untuk menjalankan proyek di lingkungan lokal Anda:
+Aplikasi ini mengikuti standar struktur Laravel untuk memastikan kemudahan pemeliharaan (*maintainability*):
 
-1. **Clone Repositori**
+| Folder / File | Deskripsi |
+| :--- | :--- |
+| `app/Http/Controllers/` | Mengelola logika bisnis dan koordinasi antara Model dan View. |
+| `database/migrations/` | Skema database terpusat (Aset AC, Lokasi, Status Maintenance, & User). |
+| `resources/views/` | Arsitektur UI yang terbagi menjadi modul Admin, Dashboard, dan Reporting. |
+| `routes/web.php` | Definisi jalur navigasi dan proteksi middleware aplikasi. |
+
+---
+
+## 🚀 Fitur Utama
+
+1.  **Centralized Asset Inventory:** Katalog lengkap unit AC mencakup serial number, brand, kapasitas (PK), dan lokasi spesifik.
+2.  **Maintenance Lifecycle Tracking:** Pantau status unit secara real-time: `Ready`, `On-Repair` (Proses), atau `Broken` (Rusak).
+3.  **Role-Based Access Control (RBAC):** Keamanan berlapis untuk Admin, Teknisi, dan Manajemen.
+4.  **Operational Insights:** Dashboard statistik untuk memantau kesehatan aset secara keseluruhan di seluruh gedung CorpU.
+
+---
+
+## 💻 Panduan Implementasi (Local Development)
+
+### Prasyarat
+* PHP >= 8.2
+* Composer
+* Node.js & NPM
+* MySQL/MariaDB
+
+### Langkah Instalasi
+1. **Clone & Navigate**
    ```bash
    git clone [https://github.com/IndraMuh/AC_Management_CorpU.git](https://github.com/IndraMuh/AC_Management_CorpU.git)
    cd AC_Management_CorpU
-Instalasi Dependensi
+Dependency Management
 
 Bash
 composer install
-Konfigurasi Environment Salin file .env.example menjadi .env dan sesuaikan konfigurasi database Anda.
+npm install && npm run build
+Environment Setup
 
 Bash
 cp .env.example .env
 php artisan key:generate
-Migrasi Database Pastikan database MySQL sudah dibuat, lalu jalankan:
+Database Synchronization
 
 Bash
-php artisan migrate
-Jalankan Aplikasi
+php artisan migrate --seed
+Deployment
 
 Bash
 php artisan serve
-Akses di browser melalui: http://localhost:8000
-
-👨‍💻 Author
-Indra Muhammad Fullstack Web & Mobile Developer
-
-Project ini dikembangkan untuk digitalisasi efisiensi maintenance aset di lingkungan Telkom CorpU.
-
-
----
-
-### Apa yang saya tambahkan?
-* **Badges:** Menambahkan badge Laravel, PHP, dan MySQL di bagian atas agar terlihat seperti repositori profesional.
-* **Struktur Folder:** Saya masukkan poin nomor 2 dari ringkasanmu agar developer lain paham anatomi kodemu.
-* **Instalasi:** Saya buatkan instruksi langkah-demi-langkah (CLI) agar siapapun yang ingin mencoba tidak bingung.
-* **Emoji:** Memberikan aksen visual (❄️, 🚀, 📂) agar teks yang padat lebih enak dibaca.
-
-README ini sudah siap tempel, Ndra. Apakah kamu ingin saya bantu buatkan file **LICENSE** (biasanya MIT) juga agar repository-mu terlihat lebih "legal" secara open-source?
+👤 Informasi Pengembang
+Indra Muhammad Fullstack Web & Mobile Developer Spesialisasi dalam pembangunan ekosistem digital berbasis Laravel & Flutter.
