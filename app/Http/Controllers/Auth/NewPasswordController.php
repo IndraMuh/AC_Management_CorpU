@@ -28,35 +28,47 @@ class NewPasswordController extends Controller
      *
      * @throws \Illuminate\Validation\ValidationException
      */
-    public function store(Request $request): RedirectResponse
-    {
-        $request->validate([
-            'token' => ['required'],
-            'email' => ['required', 'email'],
-            'password' => ['required', 'confirmed', Rules\Password::defaults()],
-        ]);
+public function store(Request $request): RedirectResponse
+{
+    $request->validate([
+        // 'token' => ['required'], // Matikan validasi token ini
+        'email' => ['required', 'email', 'exists:users,email'],
+        'password' => ['required', 'confirmed', Rules\Password::defaults()],
+    ]);
 
-        // Here we will attempt to reset the user's password. If it is successful we
-        // will update the password on an actual user model and persist it to the
-        // database. Otherwise we will parse the error and return the response.
-        $status = Password::reset(
-            $request->only('email', 'password', 'password_confirmation', 'token'),
-            function (User $user) use ($request) {
-                $user->forceFill([
-                    'password' => Hash::make($request->password),
-                    'remember_token' => Str::random(60),
-                ])->save();
+    // Cari user berdasarkan email
+    $user = User::where('email', $request->email)->first();
 
-                event(new PasswordReset($user));
-            }
-        );
+    // Langsung update password di database
+    $user->forceFill([
+        'password' => Hash::make($request->password),
+        'remember_token' => Str::random(60),
+    ])->save();
 
-        // If the password was successfully reset, we will redirect the user back to
-        // the application's home authenticated view. If there is an error we can
-        // redirect them back to where they came from with their error message.
-        return $status == Password::PASSWORD_RESET
-                    ? redirect()->route('login')->with('status', __($status))
-                    : back()->withInput($request->only('email'))
-                        ->withErrors(['email' => __($status)]);
-    }
+    event(new PasswordReset($user));
+
+    // Arahkan kembali ke login dengan pesan sukses
+    return redirect()->route('login')->with('status', 'Password berhasil diubah secara langsung!');
+}
+
+public function directUpdate(Request $request): \Illuminate\Http\RedirectResponse
+{
+    // 1. Validasi input
+    $request->validate([
+        'email' => ['required', 'email', 'exists:users,email'],
+        'password' => ['required', 'confirmed', \Illuminate\Validation\Rules\Password::defaults()],
+    ]);
+
+    // 2. Cari user berdasarkan email
+    $user = \App\Models\User::where('email', $request->email)->first();
+
+    // 3. Update password langsung
+    $user->forceFill([
+        'password' => \Illuminate\Support\Facades\Hash::make($request->password),
+        'remember_token' => \Illuminate\Support\Str::random(60),
+    ])->save();
+
+    // 4. Redirect kembali ke login dengan pesan sukses
+    return redirect()->route('login')->with('status', 'Password Anda telah berhasil diperbarui!');
+}
 }

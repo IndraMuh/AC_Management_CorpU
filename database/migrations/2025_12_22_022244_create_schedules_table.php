@@ -15,9 +15,11 @@ public function up()
     Schema::create('schedules', function (Blueprint $table) {
         $table->id();
         $table->string('name');
+        $table->string('worker_name')->nullable();
         $table->date('start_date');
         $table->date('end_date')->nullable();
         $table->text('note')->nullable();
+        $table->text('proof_image')->nullable();
         // Menambahkan 'belum' agar sesuai dengan logika Alpine.js Anda
         $table->enum('status', ['belum', 'proses', 'selesai'])->default('belum');
         $table->timestamps();

@@ -10,7 +10,7 @@ class BuildingController extends Controller
 {
     public function index()
     {
-        $buildings = Building::all(); 
+        $buildings = Building::orderBy('name', 'asc')->get();
         return view('location', compact('buildings'));
     }
 
@@ -31,7 +31,7 @@ class BuildingController extends Controller
     {
         $request->validate([
             'name' => 'required',
-            'image' => 'required|image|max:2048',
+            'image' => 'required|image|max:5000',
             'floors' => 'required|array|min:1'
         ]);
 
@@ -49,10 +49,39 @@ class BuildingController extends Controller
         return back()->with('success', 'Gedung berhasil ditambahkan!');
     }
 
-    public function update(Request $request, Building $building) {
-        $building->update(['name' => $request->name]);
-        return back()->with('success', 'Gedung diperbarui');
+    public function update(Request $request, Building $building)
+{
+    $request->validate([
+        'name' => 'required|string|max:255',
+        'image' => 'nullable|image|mimes:jpeg,png,jpg|max:5000',
+        'new_floors' => 'nullable|array',
+        'delete_floors' => 'nullable|array',
+    ]);
+
+    // 1. Update Info Gedung
+    $building->name = $request->name;
+    if ($request->hasFile('image')) {
+        $building->image = $request->file('image')->store('buildings', 'public');
     }
+    $building->save();
+
+    // 2. Hapus Lantai yang ditandai (Jika ada)
+    if ($request->has('delete_floors')) {
+        // Ini akan menghapus lantai berdasarkan ID yang dikirim
+        Floor::whereIn('id', $request->delete_floors)->delete();
+    }
+
+    // 3. Tambah Lantai Baru (Hanya jika input tidak kosong)
+    if ($request->has('new_floors')) {
+        foreach ($request->new_floors as $floorName) {
+            if ($floorName) {
+                $building->floors()->create(['name' => $floorName]);
+            }
+        }
+    }
+
+    return back()->with('success', 'Gedung berhasil diperbarui!');
+}
 
     public function destroy(Building $building)
     {

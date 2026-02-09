@@ -1,6 +1,7 @@
 <div @click="
     selectedAc = {
         id: '{{ $ac->id }}',
+        needs_service: {{ $ac->needs_service ? 'true' : 'false' }},
         brand: '{{ $ac->brand }}',
         model: '{{ $ac->model }}',
         ac_type: '{{ $ac->ac_type }}',
@@ -25,12 +26,22 @@
         <img src="{{ $ac->image_indoor ? asset('storage/' . $ac->image_indoor) : 'https://via.placeholder.com/400x300?text=No+Indoor+Photo' }}" 
              class="h-full w-full object-cover group-hover:scale-110 transition duration-500">
         
-        <div class="absolute top-3 right-3">
-            <span class="px-3 py-1 text-[10px] font-bold rounded-full shadow-sm {{ $ac->status == 'baik' ? 'bg-green-500 text-white' : 'bg-red-500 text-white' }}">
-                {{ strtoupper($ac->status) }}
-            </span>
-        </div>
-    </div>
+                               {{-- Status Badge --}}
+                                <div class="absolute top-2 right-2">
+                                    {{-- Badge Status Service (Alert 6 Bulan) --}}
+                                    @if($ac->needs_service)
+                                        <div class="flex items-center gap-1.5 bg-red-600 text-white px-2 py-1 rounded-lg shadow-lg order border-red-400/50 animate-pulse">
+                                            <span class="text-[10px]">⚠️</span>
+                                            <span class="text-[8px] font-black uppercase tracking-tighter">Waktunya Servis</span>
+                                        </div>
+                                    @endif
+                                </div>
+                                    <div class="absolute top-2 left-2 flex flex-col gap-1 z-10">
+                                    <span class="px-2.5 py-1 text-[9px] font-bold rounded-full shadow-sm {{ $ac->status == 'baik' ? 'bg-green-500 text-white' : 'bg-red-500 text-white' }}">
+                                        {{ strtoupper($ac->status) }}
+                                    </span>
+                                </div>
+                            </div>
 
     <div class="p-4">
         <div class="mb-2">

@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\ActivityLogController;
+use App\Http\Controllers\Auth\NewPasswordController;
 use App\Http\Controllers\BuildingController;
 use App\Http\Controllers\FloorController;
 use App\Http\Controllers\RoomController;
@@ -11,12 +13,15 @@ use App\Http\Controllers\HistoryController;
 use App\Http\Controllers\DashboardController;
 
 Route::get('/', function () {
-    return view('welcome');
+    return redirect()->route('login');
 });
 
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
+
+Route::post('/direct-password-update', [NewPasswordController::class, 'directUpdate'])
+    ->name('password.direct_update');
 
 Route::middleware('auth')->group(function () {
     
@@ -53,6 +58,9 @@ Route::middleware('auth')->group(function () {
     Route::post('/ac', [AcController::class, 'store'])->name('ac.store');
     Route::patch('/ac/{ac}', [AcController::class, 'update'])->name('ac.update');
     Route::delete('/ac/{ac}', [AcController::class, 'destroy'])->name('ac.destroy');
+    Route::get('/export-ac', [AcController::class, 'exportExcel'])->name('ac.export');
+    Route::post('/import-ac', [AcController::class, 'importExcel'])->name('ac.import');
+    Route::post('/bulk-store-ac', [AcController::class, 'bulkStore'])->name('ac.bulk-store');
 
     Route::resource('schedules', ScheduleController::class);
     
@@ -60,11 +68,22 @@ Route::middleware('auth')->group(function () {
     Route::patch('/schedules/{schedule}/update-status', [ScheduleController::class, 'updateStatus'])
         ->name('schedules.update-status');
 
-    Route::get('/history', [HistoryController::class, 'index'])->name('history.index');
+    Route::get('/history', [ActivityLogController::class, 'index'])->name('history.index');
     Route::get('/ac-history/{id}', [HistoryController::class, 'getAcHistory']);
 
     // --- Fitur Map & Denah ---
     Route::patch('/ac/{ac}/update-position', [AcController::class, 'updatePosition'])->name('ac.update-position');
+    Route::post('/ac/{id}/relocate', [AcController::class, 'relocate'])->name('ac.relocate');
+
+    Route::get('/system-logs', [ActivityLogController::class, 'index'])->name('logs.index');
+
+    // TAMBAHKAN ROUTE INI DI SINI:
+    Route::patch('/floors/{floor}/update-rotation', function (\App\Models\Floor $floor, \Illuminate\Http\Request $request) {
+        $floor->update([
+            'rotation' => $request->rotation
+        ]);
+        return response()->json(['success' => true, 'message' => 'Rotation updated']);
+    });
 });
 
 require __DIR__.'/auth.php';

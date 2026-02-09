@@ -22,7 +22,9 @@ public function getAcHistory($id)
 {
     $ac = \App\Models\Ac::with(['schedules' => function($query) {
         // PENTING: Harus ada withPivot('status')
-        $query->withPivot('status')->orderBy('start_date', 'desc');
+$query->withPivot('status')
+              ->wherePivot('status', 'selesai') 
+              ->orderBy('start_date', 'desc');
     }])->find($id);
 
     if (!$ac) return response()->json(['error' => 'Not Found'], 404);
@@ -34,8 +36,10 @@ public function getAcHistory($id)
             return [
                 'date' => $s->start_date ? $s->start_date->format('Y-m-d') : '-',
                 'name' => $s->name,
+                'work' => $s->worker_name ?? ' - ',
                 // Di sini data diambil dari tabel pivot ac_schedule
-                'status' => $s->pivot->status ?? 'belum' 
+                'status' => $s->pivot->status ?? 'belum',
+                'proof' => $s->proof_image 
             ];
         })
     ]);

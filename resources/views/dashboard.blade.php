@@ -1,3 +1,10 @@
+{{-- Letakkan di bagian atas dashboard.blade.php --}}
+@push('head')
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+@endpush
+
 <x-app-layout>
     <div class="min-h-screen w-full bg-[#F3F4F6] relative overflow-y-auto flex items-start justify-center p-2 md:p-4 pt-1 lg:pt-5">
         

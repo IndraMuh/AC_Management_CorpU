@@ -9,16 +9,16 @@ return new class extends Migration
     /**
      * Run the migrations.
      */
-    public function up(): void
-    {
-        Schema::create('floors', function (Blueprint $table) {
-    $table->id();
-    $table->foreignId('building_id')->constrained()->onDelete('cascade');
-    $table->string('name'); // Contoh: Lantai 1, Rooftop
-    $table->string('floor_plan')->nullable(); // Path gambar denah
-    $table->timestamps();
-});
-    }
+public function up(): void {
+    Schema::create('floors', function (Blueprint $table) {
+        $table->id();
+        $table->foreignId('building_id')->constrained()->onDelete('cascade');
+        $table->string('name');
+        $table->string('floor_plan')->nullable();
+        $table->integer('rotation')->default(0); // Tambahkan ini
+        $table->timestamps();
+    });
+}
 
     /**
      * Reverse the migrations.
