@@ -1,59 +1,84 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# ❄️ Management AC Telkom CorpU
+> **Sistem Monitoring & Inventaris Maintenance AC Real-Time**
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+[![Laravel Version](https://img.shields.io/badge/Laravel-12.x-red?style=for-the-badge&logo=laravel)](https://laravel.com)
+[![PHP Version](https://img.shields.io/badge/PHP-8.2%2B-blue?style=for-the-badge&logo=php)](https://php.net)
+[![Database](https://img.shields.io/badge/Database-MySQL-orange?style=for-the-badge&logo=mysql)](https://mysql.com)
 
-## About Laravel
+**Management AC Telkom CorpU** adalah aplikasi manajemen aset khusus untuk unit pendingin ruangan (AC) di lingkungan Corporate University. Aplikasi ini mendigitalisasi proses pencatatan, pemantauan status, hingga manajemen perbaikan unit secara terpusat.
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+---
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+## 🚀 Teknologi Utama
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+Aplikasi ini dibangun dengan stack teknologi modern untuk menjamin performa dan skalabilitas:
 
-## Learning Laravel
+* **Backend:** PHP dengan Framework **Laravel 12** (Latest Version).
+* **Database:** **MySQL / MariaDB** untuk penyimpanan relasi data aset yang kompleks.
+* **Frontend:** **Blade Templating Engine** dipadukan dengan desain dashboard yang interaktif dan responsif.
+* **Authentication:** Sistem hak akses terproteksi untuk manajemen user.
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework. You can also check out [Laravel Learn](https://laravel.com/learn), where you will be guided through building a modern Laravel application.
+---
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+## 📂 Struktur Penting Repositori
 
-## Laravel Sponsors
+Memahami struktur proyek untuk pengembangan lebih lanjut:
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+* 📂 `app/Http/Controllers/`: Inti dari logika program dan kontrol alur data aplikasi.
+* 📂 `database/migrations/`: Definisi skema database (Tabel aset, user, dan manajemen unit).
+* 📂 `resources/views/`: File UI/Tampilan yang diorganisir berdasarkan modul (Admin, Dashboard, dll).
+* 📂 `routes/web.php`: Daftar seluruh rute (URL) dan endpoint aplikasi.
 
-### Premium Partners
+---
 
-- **[Vehikl](https://vehikl.com)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Redberry](https://redberry.international/laravel-development)**
-- **[Active Logic](https://activelogic.com)**
+## ✨ Fitur & Fungsi
 
-## Contributing
+1.  **Inventarisasi Aset:** Pencatatan detail unit AC, lokasi gedung, dan spesifikasi unit.
+2.  **Maintenance Tracking:** Pengelolaan jadwal pemeliharaan rutin dan perbaikan (rusak/proses/selesai).
+3.  **User Management:** Pengaturan hak akses login untuk admin dan petugas operasional di lingkungan CorpU.
+4.  **Reporting:** Monitoring status aset secara real-time melalui dashboard utama.
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+---
 
-## Code of Conduct
+## 🛠️ Panduan Instalasi Lokal
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+Ikuti langkah berikut untuk menjalankan proyek di lingkungan lokal Anda:
 
-## Security Vulnerabilities
+1. **Clone Repositori**
+   ```bash
+   git clone [https://github.com/IndraMuh/AC_Management_CorpU.git](https://github.com/IndraMuh/AC_Management_CorpU.git)
+   cd AC_Management_CorpU
+Instalasi Dependensi
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+Bash
+composer install
+Konfigurasi Environment Salin file .env.example menjadi .env dan sesuaikan konfigurasi database Anda.
 
-## License
+Bash
+cp .env.example .env
+php artisan key:generate
+Migrasi Database Pastikan database MySQL sudah dibuat, lalu jalankan:
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+Bash
+php artisan migrate
+Jalankan Aplikasi
+
+Bash
+php artisan serve
+Akses di browser melalui: http://localhost:8000
+
+👨‍💻 Author
+Indra Muhammad Fullstack Web & Mobile Developer
+
+Project ini dikembangkan untuk digitalisasi efisiensi maintenance aset di lingkungan Telkom CorpU.
+
+
+---
+
+### Apa yang saya tambahkan?
+* **Badges:** Menambahkan badge Laravel, PHP, dan MySQL di bagian atas agar terlihat seperti repositori profesional.
+* **Struktur Folder:** Saya masukkan poin nomor 2 dari ringkasanmu agar developer lain paham anatomi kodemu.
+* **Instalasi:** Saya buatkan instruksi langkah-demi-langkah (CLI) agar siapapun yang ingin mencoba tidak bingung.
+* **Emoji:** Memberikan aksen visual (❄️, 🚀, 📂) agar teks yang padat lebih enak dibaca.
+
+README ini sudah siap tempel, Ndra. Apakah kamu ingin saya bantu buatkan file **LICENSE** (biasanya MIT) juga agar repository-mu terlihat lebih "legal" secara open-source?
