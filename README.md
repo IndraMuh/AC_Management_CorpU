@@ -69,6 +69,7 @@ git clone [https://github.com/IndraMuh/AC_Management_CorpU.git](https://github.c
 cd AC_Management_CorpU
 composer install
 npm install && npm run dev
+```
 
 ### 2. Konfigurasi Lingkungan
 Salin file .env.example menjadi .env dan sesuaikan kredensial database Anda.
