@@ -95,6 +95,6 @@ Indra Muhammad - Web & Mobile Developer
 
 GitHub: @IndraMuh
 
-Instagram: @_indramhmd
+---
 
 Developed for Digital Transformation in Asset Management @ Telkom CorpU.
