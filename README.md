@@ -2,7 +2,7 @@
 > **Enterprise Asset Management & Predictive Maintenance for Air Conditioning Units**
 
 [![Laravel Version](https://img.shields.io/badge/Laravel-12.x-red?style=for-the-badge&logo=laravel)](https://laravel.com)
-[![PHP Version](https://img.shields.io/badge/PHP-8.1%2B-blue?style=for-the-badge&logo=php)](https://php.net)
+[![PHP Version](https://img.shields.io/badge/PHP-8.3%2B-blue?style=for-the-badge&logo=php)](https://php.net)
 [![License](https://img.shields.io/badge/License-MIT-green?style=for-the-badge)](LICENSE)
 
 **AC Management System (CorpU)** adalah platform manajemen aset digital yang dirancang khusus untuk memantau inventaris, hierarki lokasi, serta otomatisasi penjadwalan pemeliharaan AC secara efisien dan terintegrasi.
