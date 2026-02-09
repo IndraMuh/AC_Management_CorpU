@@ -1,85 +1,97 @@
-# ❄️ Management AC Telkom CorpU
-> **Enterprise Asset Management System for High-Efficiency Maintenance Tracking**
+# ❄️ AC Management System - CorpU
+> **Enterprise Asset Management & Predictive Maintenance for Air Conditioning Units**
 
-[![Framework](https://img.shields.io/badge/Laravel-12.x-E3342F?style=for-the-badge&logo=laravel&logoColor=white)](https://laravel.com)
-[![PHP](https://img.shields.io/badge/PHP-8.2%2B-777BB4?style=for-the-badge&logo=php&logoColor=white)](https://php.net)
-[![Database](https://img.shields.io/badge/MySQL-00758F?style=for-the-badge&logo=mysql&logoColor=white)](https://mysql.com)
+[![Laravel Version](https://img.shields.io/badge/Laravel-10.x-red?style=for-the-badge&logo=laravel)](https://laravel.com)
+[![PHP Version](https://img.shields.io/badge/PHP-8.1%2B-blue?style=for-the-badge&logo=php)](https://php.net)
 [![License](https://img.shields.io/badge/License-MIT-green?style=for-the-badge)](LICENSE)
 
----
-
-## 📋 Ikhtisar Proyek
-
-**Management AC Telkom CorpU** adalah sistem manajemen aset digital yang dirancang khusus untuk mengoptimalkan siklus hidup pemeliharaan unit pendingin ruangan (AC) di lingkungan **Telkom Corporate University**. 
-
-Sistem ini mentransformasi proses manual menjadi alur kerja digital yang terukur, memungkinkan pengambilan keputusan berbasis data terkait perbaikan, penggantian aset, dan manajemen vendor maintenance.
+**AC Management System (CorpU)** adalah platform manajemen aset digital yang dirancang khusus untuk memantau inventaris, hierarki lokasi, serta otomatisasi penjadwalan pemeliharaan AC secara efisien dan terintegrasi.
 
 ---
 
-## 🛠️ Arsitektur & Teknologi
+## 🌟 Fitur Unggulan
 
-Sistem ini dibangun dengan arsitektur **Monolithic Robust** menggunakan teknologi terkini:
+### 1. Manajemen Lokasi & Visualisasi Hierarkis
+Sistem mengelola aset dengan struktur organisasi yang mendalam:
+* **Struktur Bangunan:** Manajemen data Gedung (dengan unggahan fasad), Lantai, hingga detail Ruangan.
+* **Interactive Floorplan:** Visualisasi posisi unit AC pada denah (PDF/Gambar) menggunakan koordinat interaktif untuk akurasi lokasi pengerjaan.
 
-* **Core Engine:** Laravel 12 (Modern PHP Framework)
-* **Database:** MySQL (Relational Database Management System)
-* **Templating:** Blade Engine dengan implementasi Reusable Components
-* **Styling:** Tailwind CSS (Utility-first CSS framework untuk UI yang responsif)
-* **Architecture:** MVC (Model-View-Controller) Pattern
+### 2. Inventaris & Manajemen Data Massal
+Efisiensi input data skala besar dengan fitur:
+* **Master Data AC:** Dokumentasi teknis lengkap (Merk, Tipe, Model, hingga Serial Number Indoor/Outdoor).
+* **Bulk Processing:** Impor ribuan data melalui Excel serta sinkronisasi foto unit otomatis dari file ZIP berdasarkan pencocokan nomor seri (Serial Number Matching).
+
+### 3. Smart Maintenance & Monitoring
+Transformasi pemeliharaan reaktif menjadi preventif:
+* **Real-time Status:** Monitoring kondisi unit (Baik, Rusak, atau Dalam Perbaikan).
+* **Predictive Overdue:** Notifikasi otomatis untuk unit yang telah melewati batas waktu servis (6 bulan).
+* **Proof of Work:** Sistem unggah bukti dokumentasi foto setelah pengerjaan servis selesai.
+
+### 4. Audit Trail & Analytics
+Transparansi data dan performa sistem:
+* **Activity Logs:** Pencatatan jejak audit (Audit Trail) untuk setiap perubahan data (siapa, melakukan apa, kapan).
+* **Service History:** Log riwayat servis per unit yang dapat diakses instan untuk analisis performa perangkat.
 
 ---
 
-## 📂 Struktur Repositori & Modul
+## 🛠 Spesifikasi Teknis
 
-Aplikasi ini mengikuti standar struktur Laravel untuk memastikan kemudahan pemeliharaan (*maintainability*):
+Aplikasi ini dibangun dengan arsitektur modern untuk menjamin reaktivitas dan keamanan:
 
-| Folder / File | Deskripsi |
+| Komponen | Teknologi |
 | :--- | :--- |
-| `app/Http/Controllers/` | Mengelola logika bisnis dan koordinasi antara Model dan View. |
-| `database/migrations/` | Skema database terpusat (Aset AC, Lokasi, Status Maintenance, & User). |
-| `resources/views/` | Arsitektur UI yang terbagi menjadi modul Admin, Dashboard, dan Reporting. |
-| `routes/web.php` | Definisi jalur navigasi dan proteksi middleware aplikasi. |
+| **Backend** | PHP 8.1+ | Laravel 10.x |
+| **Frontend** | Tailwind CSS | Alpine.js (Reactive UI) |
+| **Database** | MySQL / MariaDB |
+| **Core Libraries** | `spatie/laravel-activitylog`, `maatwebsite/excel`, `PDF.js`, `JSZip` |
 
 ---
 
-## 🚀 Fitur Utama
+## 📂 Arsitektur Controller Utama
 
-1.  **Centralized Asset Inventory:** Katalog lengkap unit AC mencakup serial number, brand, kapasitas (PK), dan lokasi spesifik.
-2.  **Maintenance Lifecycle Tracking:** Pantau status unit secara real-time: `Ready`, `On-Repair` (Proses), atau `Broken` (Rusak).
-3.  **Role-Based Access Control (RBAC):** Keamanan berlapis untuk Admin, Teknisi, dan Manajemen.
-4.  **Operational Insights:** Dashboard statistik untuk memantau kesehatan aset secara keseluruhan di seluruh gedung CorpU.
+Sistem ini diorganisir menggunakan pola desain yang modular:
+
+* `AcController.php`: Menangani logika CRUD unit AC dan pemrosesan *bulk storage*.
+* `BuildingController.php`: Mengatur entitas bangunan dan pemetaan visual denah.
+* `ScheduleController.php`: Algoritma penjadwalan servis dan logika notifikasi *overdue*.
+* `ActivityLogController.php`: Manajemen antarmuka jejak audit sistem.
+* `DashboardController.php`: Agregasi data statistik untuk visualisasi ringkasan eksekutif.
 
 ---
 
-## 💻 Panduan Implementasi (Local Development)
+## 🚀 Panduan Instalasi
 
-### Prasyarat
-* PHP >= 8.2
-* Composer
-* Node.js & NPM
-* MySQL/MariaDB
+Pastikan perangkat Anda telah terpasang **Composer**, **Node.js**, dan **MySQL**.
 
-### Langkah Instalasi
-1. **Clone & Navigate**
-   ```bash
-   git clone [https://github.com/IndraMuh/AC_Management_CorpU.git](https://github.com/IndraMuh/AC_Management_CorpU.git)
-   cd AC_Management_CorpU
-Dependency Management
-
-Bash
+### 1. Persiapan Repositori
+```bash
+git clone [https://github.com/IndraMuh/AC_Management_CorpU.git](https://github.com/IndraMuh/AC_Management_CorpU.git)
+cd AC_Management_CorpU
 composer install
-npm install && npm run build
-Environment Setup
+npm install && npm run dev
 
-Bash
-cp .env.example .env
+### 2. Konfigurasi Lingkungan
+Salin file .env.example menjadi .env dan sesuaikan kredensial database Anda.
+```bash
 php artisan key:generate
-Database Synchronization
-
-Bash
+php artisan storage:link
+```
+### 3. Migrasi Database
+Jalankan migrasi beserta data awal (seeder):
+```bash
 php artisan migrate --seed
-Deployment
-
-Bash
+```
+### 4. Jalankan Server
+```bash
 php artisan serve
-👤 Informasi Pengembang
-Indra Muhammad Fullstack Web & Mobile Developer Spesialisasi dalam pembangunan ekosistem digital berbasis Laravel & Flutter.
+```
+Akses sistem melalui http://localhost:8000.
+
+👨‍💻 Kontributor
+Indra Muhammad - Web & Mobile Developer
+
+GitHub: @IndraMuh
+
+Instagram: @_indramhmd
+
+Developed for Digital Transformation in Asset Management @ Telkom CorpU.
