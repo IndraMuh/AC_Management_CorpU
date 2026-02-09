@@ -40,7 +40,7 @@ Aplikasi ini dibangun dengan arsitektur modern untuk menjamin reaktivitas dan ke
 
 | Komponen | Teknologi |
 | :--- | :--- |
-| **Backend** | PHP 8.1+ | Laravel 10.x |
+| **Backend** | PHP 8.3+ | Laravel 12.x |
 | **Frontend** | Tailwind CSS | Alpine.js (Reactive UI) |
 | **Database** | MySQL / MariaDB |
 | **Core Libraries** | `spatie/laravel-activitylog`, `maatwebsite/excel`, `PDF.js`, `JSZip` |
@@ -86,6 +86,8 @@ php artisan migrate --seed
 php artisan serve
 ```
 Akses sistem melalui http://localhost:8000.
+
+---
 
 👨‍💻 Kontributor
 Indra Muhammad - Web & Mobile Developer
